@@ -9,11 +9,12 @@ project(coordgen)
 #    SOURCE_DIR ${coordgen_SOURCE_DIR}/maeparser
 #)
 
-find_package(maeparser)
 
 file(GLOB SOURCES "*.cpp")
 find_package(Boost)
+find_package(maeparser)
 include_directories(${Boost_INCLUDE_DIRS})
+include_directories(${maeparser_INCLUDE_DIRS})
 add_library(coordgenlibs SHARED ${SOURCES})
 add_executable(example example/example.cpp)
 
