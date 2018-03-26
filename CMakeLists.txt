@@ -23,6 +23,8 @@ target_link_libraries(example coordgenlibs)
 enable_testing()
 
 install(TARGETS coordgenlibs
+    ARCHIVE DESTINATION lib
+    RUNTIME DESTINATION bin
     LIBRARY DESTINATION lib)
 
 install(FILES
