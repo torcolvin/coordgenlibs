@@ -14,8 +14,9 @@ script:
   - mkdir build
   - cd build
   - export CXX="g++-4.8"
-  - cmake .. -Dmaeparser_DIR=$TRAVIS_BUILD_DIR/installation/lib/cmake
-  - make VERBOSE=1
+  - export CMAKE_PREFIX_PATH=$TRAVIS_BUILD_DIR/installation
+  - cmake ..
+  - make
   - make test CTEST_OUTPUT_ON_FAILURE=1
 
 addons:
