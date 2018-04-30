@@ -3,12 +3,17 @@ sudo: false
 language: cpp
 
 before_script:
+  - git clone https://github.com/schrodinger/maeparser.git
+  - mkdir maeparser/build
+  - cd maeparser/build
+  - cmake ..
+  - make install
+
+script:
   - mkdir build
   - cd build
   - export CXX="g++-4.8"
   - cmake ..
-
-script:
   - make
   - make test CTEST_OUTPUT_ON_FAILURE=1
 
