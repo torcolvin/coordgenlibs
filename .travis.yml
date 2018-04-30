@@ -5,15 +5,16 @@ language: cpp
 before_script:
   - git clone https://github.com/schrodinger/maeparser.git
   - mkdir maeparser/build
-  - cd maeparser/build
-  - cmake ..
+  - pushd maeparser/build
+  - cmake .. -DCMAKE_PREFIX=$TRAVIS_BUILD_DIR/installation
   - make install
+  - popd
 
 script:
   - mkdir build
   - cd build
   - export CXX="g++-4.8"
-  - cmake ..
+  - cmake .. -Dmaeparser_DIR=$TRAVIS_BUILD_DIR/installation/lib/cmake
   - make
   - make test CTEST_OUTPUT_ON_FAILURE=1
 
