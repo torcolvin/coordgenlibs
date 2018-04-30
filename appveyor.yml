@@ -1,0 +1,34 @@
+environment:
+  BOOST_ROOT: c:/Libraries/boost
+  BOOST_LIBRARYDIR: c:/Libraries/boost/lib64-msvc-12.0
+
+image: Visual Studio 2013
+
+platform: x64
+
+configuration:
+  - Release
+    #  - Debug
+
+install:
+  # by default, all script lines are interpreted as batch
+
+build:
+  project: c:\projects\coordgenlibs\build\ALL_BUILD.vcxproj
+  parallel: true
+
+before_build:
+  - git clone https://github.com/torcolvin/maeparser.git
+  - mkdir c:\projects\coordgenlibs\maeparser\build
+  - cd c:\projects\coordgenlibs\maeparser\build
+  - cmake -G "Visual Studio 12 Win64" -DBOOST_ROOT="%BOOST_ROOT%" -DBOOST_LIBRARYDIR="%BOOST_LIBRARYDIR%" -DCMAKE_INSTALL_PREFIX=%P% .. --install
+  - mkdir c:\projects\coordgenlibs
+  - cd c:\projects\coordgenlibs\build
+  - cmake -G "Visual Studio 12 Win64" -DBOOST_ROOT="%BOOST_ROOT%" -DBOOST_LIBRARYDIR="%BOOST_LIBRARYDIR%" -DCMAKE_PREFIX_PATH="%P\lib\cmake" -DCMAKE_INSTALL_PREFIX=%P% ..
+
+test_script:
+  - set PATH=%BOOST_LIBRARYDIR%;%PATH%
+  - cd c:\projects\coordgenlibs\build
+  - ctest --verbose --build-config %CONFIGURATION%
+
+
