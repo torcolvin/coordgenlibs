@@ -2,8 +2,7 @@ environment:
   BOOST_ROOT: c:/Libraries/boost
   BOOST_LIBRARYDIR: c:/Libraries/boost/lib64-msvc-12.0
   INSTALL_PREFIX : c:\installation
-  MAEPARSER_BUILD : c:\projects\maeparser\build
-  COORDGENLIBS_BUILD : c:\projects\coordgenlibs\build
+  CMAKE_PREFIX_PATH : c:\installation\lib\cmake
 
 image: Visual Studio 2013
 
